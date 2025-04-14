@@ -1,5 +1,5 @@
-study_name: Optimize_Template
-trials: 20
+study_name: TPE_Search
+trials: 100
 seed: 42
 metric: val_loss
 direction: minimize

@@ -12,10 +12,10 @@ class MLP(nn.Module):
         input_size = 1
         output_size = 1
 
-        net = [nn.Linear(input_size, nodes), nn.GELU()]
+        net = [nn.Linear(input_size, nodes), nn.ReLU()]
         for _ in range(layers - 1):
             net.append(nn.Linear(nodes, nodes))
-            net.append(nn.GELU())
+            net.append(nn.ReLU())
         net.append(nn.Linear(nodes, output_size))
         self.net = nn.Sequential(*net)
 

@@ -19,8 +19,10 @@ def load_data(n=10000, split_ratio=0.8, seed=42):
     # Fix Seed
     torch.manual_seed(seed)
 
-    x = torch.linspace(0, 1, n) + torch.rand(n) * 0.01
-    y = torch.cos(x * (2 * pi)) + torch.rand(n) * 0.01
+    x = torch.linspace(-5, 15, n)
+    y_true = np.sin(x) * np.exp(-0.1 * x) + 0.1 * np.cos(5 * x)
+    noise_level = 0.05
+    y = y_true + noise_level * torch.randn(n)
 
     ics = torch.randperm(n)
     ics_train = ics[: int(n * split_ratio)]
@@ -34,7 +36,7 @@ def load_data(n=10000, split_ratio=0.8, seed=42):
     train_ds = TensorDataset(x_train, y_train)
     val_ds = TensorDataset(x_val, y_val)
 
-    return train_ds, val_ds
+    return train_ds, val_ds, (x, y_true, y)
 
 
 def set_seed(seed: int):

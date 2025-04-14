@@ -23,7 +23,7 @@ def main():
     base_config = RunConfig.from_yaml(args.run_config)
 
     # Load data
-    ds_train, ds_val = load_data()  # pyright: ignore
+    ds_train, ds_val, _ = load_data()  # pyright: ignore
     dl_train = DataLoader(ds_train, batch_size=base_config.batch_size, shuffle=True)
     dl_val = DataLoader(ds_val, batch_size=base_config.batch_size, shuffle=False)
 

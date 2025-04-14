@@ -1,0 +1,22 @@
+project: QU4_hw1_opt
+device: cuda:0
+net: model.MLP
+optimizer: torch.optim.adamw.AdamW
+scheduler: hyperbolic_lr.ExpHyperbolicLR
+epochs: 250
+batch_size: 64
+seeds: [89, 231, 928]
+net_config:
+  nodes: 128
+  layers: 5
+optimizer_config:
+  lr: 0.004381529006898638
+scheduler_config:
+  upper_bound: 350
+  max_iter: 250
+  infimum_lr: 1.3798964431918998e-06
+early_stopping_config:
+  enabled: false
+  patience: 10
+  mode: min # 'min' or 'max'
+  min_delta: 0.0001 # Percent

@@ -1,5 +1,6 @@
 import torch
 import torch.nn.functional as F
+from torch.utils.data import DataLoader
 import numpy as np
 import matplotlib.pyplot as plt
 import scienceplots
@@ -54,13 +55,26 @@ def main():
     # device = select_device()
     # model = model.to(device)
 
-    _, dl_val = load_data()  # Assuming this is implemented in util.py
+    _, _, (total_ds, x, y_true) = load_data()  # Assuming this is implemented in util.py
+    dl_total = DataLoader(total_ds, batch_size=10000, shuffle=False)
 
-    val_loss, preds, targets = test_model(model, dl_val, device)
-    print(f"Validation Loss: {val_loss}")
+    total_loss, preds, targets = test_model(model, dl_total, device)
+    print(f"Total Loss: {total_loss}")
+    y_pred = np.array(preds)
+    y_data = np.array(targets).reshape(-1)
 
-    # Additional custom analysis can be added here
-    # ...
+    # Plotting
+    with plt.style.context(["science", "nature"]):
+        fig, ax = plt.subplots()
+        ax.scatter(x, y_data, label="Data", alpha=0.1, s=10, color='blue')
+        ax.plot(x, y_true, label="True", color='green', linewidth=2)
+        ax.plot(x, y_pred, label="Predicted", color='red', linewidth=2, linestyle="--")
+        ax.set_xlabel(r"$x$")
+        ax.set_ylabel(r"$y$")
+        ax.legend()
+        ax.autoscale(tight=True)
+        fig.savefig("best_result.png", dpi=600, bbox_inches="tight")
+
 
 
 if __name__ == "__main__":

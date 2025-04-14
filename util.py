@@ -35,8 +35,9 @@ def load_data(n=10000, split_ratio=0.8, seed=42):
 
     train_ds = TensorDataset(x_train, y_train)
     val_ds = TensorDataset(x_val, y_val)
+    total_ds = TensorDataset(x.view(-1, 1), y.view(-1, 1))
 
-    return train_ds, val_ds, (x, y_true, y)
+    return train_ds, val_ds, (total_ds, x, y_true)
 
 
 def set_seed(seed: int):

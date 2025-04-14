@@ -1,4 +1,4 @@
-project: QU4_hw1_opt
+project: QU4_hw1
 device: cuda:0
 net: model.MLP
 optimizer: torch.optim.adamw.AdamW

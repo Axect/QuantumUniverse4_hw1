@@ -73,7 +73,7 @@ def main():
         ax.set_ylabel(r"$y$")
         ax.legend()
         ax.autoscale(tight=True)
-        fig.savefig("best_result.png", dpi=600, bbox_inches="tight")
+        fig.savefig("best_result.png", dpi=300, bbox_inches="tight")
 
 
 
